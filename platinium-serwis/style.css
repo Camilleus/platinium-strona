@@ -1128,6 +1128,185 @@ a.contact-card-value:hover { color: var(--blue-light); }
   vertical-align: middle;
 }
 
+/* ============================================
+   GOOGLE REVIEWS
+   ============================================ */
+
+.reviews-google {
+  background: var(--bg);
+}
+
+.reviews-badge-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.google-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 100px;
+  margin-bottom: 16px;
+}
+
+.google-stars {
+  display: flex;
+  gap: 2px;
+  color: #FBBF24;
+}
+
+.google-score {
+  font-weight: 700;
+  color: var(--white);
+}
+
+.google-count {
+  font-size: 0.85rem;
+  color: var(--white-40);
+}
+
+.reviews-carousel {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 40px;
+}
+
+.reviews-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 24px;
+}
+
+.review-slide {
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 300px;
+}
+
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.review-card:hover {
+  border-color: var(--border-blue);
+  background: var(--bg-card-hover);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--white-40);
+  flex-shrink: 0;
+}
+
+.review-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--white);
+}
+
+.review-rank {
+  font-size: 0.75rem;
+  color: var(--white-40);
+}
+
+.review-stars {
+  display: flex;
+  gap: 2px;
+  color: #FBBF24;
+  margin: 4px 0;
+}
+
+.review-time {
+  font-size: 0.75rem;
+  color: var(--white-40);
+}
+
+.review-body {
+  font-size: 0.9rem;
+  color: var(--white-70);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white-15);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dot.active {
+  background: var(--blue);
+  transform: scale(1.2);
+}
+
+.carousel-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-70);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.carousel-arrow:hover {
+  background: var(--white-07);
+  color: var(--white);
+  border-color: var(--white-40);
+}
+
 .footer-bottom {
   border-top: 1px solid var(--border);
   padding: 20px 0;
@@ -1389,6 +1568,14 @@ a.contact-card-value:hover { color: var(--blue-light); }
   .footer-grid { grid-template-columns: 1fr; gap: 36px; }
   .footer-bottom { flex-direction: column; text-align: center; gap: 8px; }
   .footer-tagline { max-width: 100%; }
+
+  .review-slide {
+    flex: 0 0 100%;
+  }
+
+  .reviews-track {
+    gap: 16px;
+  }
 
   /* EMERGENCY BUTTON – tylko ikona na mobile */
   .emergency-btn span:not(.emergency-pulse) { display: none; }
