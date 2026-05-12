@@ -160,3 +160,101 @@ if ('IntersectionObserver' in window) {
   style.textContent = '.visible { opacity: 1 !important; transform: translateY(0) !important; }';
   document.head.appendChild(style);
 }
+
+// ============================================
+// REVIEWS CAROUSEL
+// ============================================
+
+const reviewsTrack = document.getElementById('reviewsTrack');
+const prevBtn = document.getElementById('prevReview');
+const nextBtn = document.getElementById('nextReview');
+const dotsContainer = document.getElementById('carouselDots');
+
+if (reviewsTrack) {
+  const slides = Array.from(reviewsTrack.children);
+  let currentIndex = 0;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsContainer.children);
+
+  function updateCarousel() {
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    const gap = 24; // matching CSS gap
+    const isMobile = window.innerWidth <= 768;
+    const moveAmount = isMobile ? (slideWidth + 16) : (slideWidth + gap);
+
+    reviewsTrack.style.transform = `translateX(-${currentIndex * moveAmount}px)`;
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  function goToSlide(index) {
+    const isMobile = window.innerWidth <= 768;
+    const maxIndex = isMobile ? slides.length - 1 : slides.length - 3;
+    currentIndex = Math.max(0, Math.min(index, maxIndex));
+    updateCarousel();
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      const isMobile = window.innerWidth <= 768;
+      const maxIndex = isMobile ? slides.length - 1 : slides.length - 3;
+      if (currentIndex < maxIndex) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(0); // Loop
+      }
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        goToSlide(currentIndex - 1);
+      } else {
+        const isMobile = window.innerWidth <= 768;
+        const maxIndex = isMobile ? slides.length - 1 : slides.length - 3;
+        goToSlide(maxIndex); // Loop back
+      }
+    });
+  }
+
+  // Handle window resize
+  window.addEventListener('resize', updateCarousel);
+
+  // Auto-play
+  let autoPlayInterval = setInterval(() => {
+    const isMobile = window.innerWidth <= 768;
+    const maxIndex = isMobile ? slides.length - 1 : slides.length - 3;
+    if (currentIndex < maxIndex) {
+      goToSlide(currentIndex + 1);
+    } else {
+      goToSlide(0);
+    }
+  }, 5000);
+
+  // Pause on hover
+  reviewsTrack.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+  reviewsTrack.addEventListener('mouseleave', () => {
+    autoPlayInterval = setInterval(() => {
+      const isMobile = window.innerWidth <= 768;
+      const maxIndex = isMobile ? slides.length - 1 : slides.length - 3;
+      if (currentIndex < maxIndex) {
+        goToSlide(currentIndex + 1);
+      } else {
+        goToSlide(0);
+      }
+    }, 5000);
+  });
+}
